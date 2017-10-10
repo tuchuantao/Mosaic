@@ -1,0 +1,87 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.kevin.mosaic.widget.MosaicView
+        android:id="@+id/mosaic_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#eeeff3"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/paint_size_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/paint_size_level_one"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/mosaic_check_paint_size_level_one"
+                android:button="@null"
+                android:gravity="center"/>
+
+            <RadioButton
+                android:id="@+id/paint_size_level_two"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/mosaic_check_paint_size_level_two"
+                android:button="@null"
+                android:gravity="center"/>
+
+            <RadioButton
+                android:id="@+id/paint_size_level_three"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/mosaic_check_paint_size_level_three"
+                android:button="@null"
+                android:gravity="center"/>
+
+            <RadioButton
+                android:id="@+id/paint_size_level_four"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/mosaic_check_paint_size_level_four"
+                android:button="@null"
+                android:gravity="center"/>
+        </RadioGroup>
+
+        <ImageView
+            android:id="@+id/last"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/icon_mosaic_last_pressed"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/next"
+            android:layout_toStartOf="@+id/next"/>
+
+        <ImageView
+            android:id="@+id/next"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginRight="20dp"
+            android:textSize="14dp"
+            android:background="@drawable/icon_mosaic_next_pressed"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+</LinearLayout>
