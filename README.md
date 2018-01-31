@@ -6,7 +6,7 @@
 
 #### 具体效果
 
-![Alt text](/imgs/1.jpg)
+![结果](/imgs/1.png)
 
 
 &copy;CopyRight: kevinTu
