@@ -6,9 +6,9 @@
 
 #### 具体效果
 
-![] (/imgs/1.png =100x100)
+![开始] (/imgs/1.png =100x100)
 <br/>
 <br/>
-![] (/imgs/2.png =100x100)
+![结果] (/imgs/2.png =100x100)
 
 &copy;CopyRight: kevinTu
