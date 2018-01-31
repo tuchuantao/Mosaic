@@ -24,7 +24,7 @@ public class FileUtils {
             fileFolder = context.getCacheDir();
         }
         if (!fileFolder.exists()) { // 如果目录不存在，则创建一个目录
-            fileFolder.mkdir();
+            fileFolder.mkdirs();
         }
         if (bm == null) {
             return "";
