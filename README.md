@@ -6,10 +6,11 @@
 
 #### 具体效果
 
-<img src="./imgs/1.png" width = "200" height = "300" alt="图片名称" align=center />
-![Alt 开始](/imgs/1.png)
+<img src="./imgs/1.png" width = "400" height = "500" alt="图片名称" align=center />
 <br/>
 <br/>
-![Alt 结果](/imgs/2.png =100x100)
+<img src="./imgs/2.png" width = "400" height = "500" alt="图片名称" align=center />
+<br/>
+<br/>
 
 &copy;CopyRight: kevinTu
