@@ -1,12 +1,18 @@
 package com.kevin.mosaic.activity;
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,7 +32,8 @@ import java.io.FileNotFoundException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, MosaicView.HandleListener, RadioGroup.OnCheckedChangeListener {
 
-    private final static int SELECT_PHOTO =  123;
+    private final static int SELECT_PHOTO = 123;
+    private final static int REQUEST_PERMISSION_REQUEST_CODE = 321;
 
     private MosaicView mosaicView;
     private ImageView lastBtn;
@@ -42,15 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         mosaicView = (MosaicView) findViewById(R.id.mosaic_view);
         mosaicView.setDrawingCacheEnabled(true);
-        /*final String path = getIntent().getStringExtra("path");
-        mosaicView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-
-            @Override
-            public void onGlobalLayout() {
-                mosaicView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                mosaicView.initImgByPath(path, MainActivity.this);
-            }
-        });*/
 
         lastBtn = (ImageView) findViewById(R.id.last);
         lastBtn.setOnClickListener(this);
@@ -75,7 +73,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 selectPhoto();
                 break;
             case R.id.save_photo:
-                savePhoto();
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissionIfNeed();
+                } else  {
+                    savePhoto();
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -93,6 +95,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (null != bitmap) {
             String filePath = FileUtils.saveFile(MainActivity.this, bitmap, System.currentTimeMillis() + ".png", Environment.getExternalStorageDirectory() + "/mosaic/");
             Toast.makeText(MainActivity.this, TextUtils.isEmpty(filePath) ? "save photo is failed..." : "successed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void requestPermissionIfNeed() {
+        int checkPermission = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (checkPermission == PackageManager.PERMISSION_GRANTED) { // 判断是否获得相应权限
+            savePhoto();
+        } else {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_PERMISSION_REQUEST_CODE) {
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                savePhoto();
+            } else {
+                Toast.makeText(this,"拒绝授权，请授权",Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
