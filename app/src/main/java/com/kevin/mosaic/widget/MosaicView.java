@@ -466,6 +466,9 @@ public class MosaicView extends ViewGroup implements OnScaleGestureListener {
 	}
 
 	public Bitmap createViewBitmap() {
+		if (mImageHeight == 0 || mImageWidth == 0) {
+			return null;
+		}
 		Bitmap bitmap = Bitmap.createBitmap((int)(mImageWidth / scale), (int)(mImageHeight / scale), Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
 		// 判断是否有缩放
